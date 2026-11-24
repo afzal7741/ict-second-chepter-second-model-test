@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ICT WITH AH SHOIKOT: ডেটা কমিউনিকেশন মাধ্যম ও ওয়্যারলেস</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f6fb;--card:#fff;--ink:#14213d;--mute:#5b6b86;--line:#d8e0ee;--accent:#2b4acb;--ok:#12a150;--okbg:#e4f6ec;--bad:#d62839;--badbg:#fde8ea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0f1524;--card:#18213a;--ink:#eaf0ff;--mute:#9aa8c7;--line:#2c3858;--accent:#7b93ff;--ok:#3ddc84;--okbg:#12362a;--bad:#ff6b78;--badbg:#3a1a20}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0f1524;--card:#18213a;--ink:#eaf0ff;--mute:#9aa8c7;--line:#2c3858;--accent:#7b93ff;--ok:#3ddc84;--okbg:#12362a;--bad:#ff6b78;--badbg:#3a1a20}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif;font-size:17px;line-height:1.6}
+main{max-width:640px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:26px;margin:8px 0 4px}
+p.sub{color:var(--mute);margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;border-radius:12px;padding:8px 10px;text-align:center;font-weight:600;border:1px solid var(--line);background:var(--card)}
+.stat b{display:block;font-size:24px;line-height:1.2}
+.stat.ok{color:var(--ok);background:var(--okbg);border-color:transparent}
+.stat.bad{color:var(--bad);background:var(--badbg);border-color:transparent}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-bottom:14px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .3s}
+.q{white-space:pre-line;font-size:20px;font-weight:600;margin:0 0 14px}
+.opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer}
+.opt:focus-visible,.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.opt .t{flex:1}
+.opt .m{font-size:22px;font-weight:700;width:26px;text-align:center}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}
+.opt.ok .m{color:var(--ok)}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.opt.bad .m{color:var(--bad)}
+.opt:disabled{cursor:default}
+.btn{font:inherit;font-weight:600;border:0;border-radius:12px;padding:12px 20px;background:var(--accent);color:#fff;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.big{font-size:54px;font-weight:700;line-height:1.1;margin:4px 0}
+details{margin-top:16px}
+summary{cursor:pointer;font-weight:600;color:var(--accent)}
+textarea{width:100%;min-height:150px;font:inherit;font-size:15px;padding:10px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);margin:10px 0}
+.hint{font-size:14px;color:var(--mute)}
+.err{color:var(--bad);font-size:15px}
+.rev{border-top:1px solid var(--line);padding:10px 0;font-size:16px}
+.rev .a{color:var(--ok)}.rev .w{color:var(--bad)}
+.brand{display:inline-block;font-weight:700;letter-spacing:.08em;font-size:15px;color:#fff;background:var(--accent);border-radius:999px;padding:4px 14px;margin:6px 0}.brand.sm{font-size:12px;padding:2px 10px;margin:0 0 10px}.inp{width:100%;font:inherit;padding:10px 12px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);margin:4px 0 12px}.stats{gap:6px}.stat{font-size:13px;padding:6px 4px}.stat b{font-size:19px}.scroll{overflow-x:auto;margin-top:8px}table{border-collapse:collapse;width:100%;font-size:15px;white-space:nowrap}th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:center}th{color:var(--mute);font-weight:600}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+var DEFAULT=[
+{q:"জোড়ায় জোড়ায় পেঁচানো তার দিয়ে তৈরি ক্যাবলকে কী বলে?",o:["টেলিফোন ক্যাবল","কোএক্সিয়াল ক্যাবল","টুইস্টেড পেয়ার ক্যাবল","ফাইবার অপটিক ক্যাবল"],a:2},
+{q:"শিক্ষা প্রতিষ্ঠানের LAN-এ সাধারণত কোন ক্যাবল ব্যবহৃত হয়?",o:["টুইস্টেড পেয়ার","কোএক্সিয়াল","থিকনেট","অপটিক ফাইবার"],a:0},
+{q:"কোএক্সিয়াল ক্যাবল কত প্রকার?",o:["দুই","তিন","চার","পাঁচ"],a:0},
+{q:"নিচের কোন ক্যাবলের ডেটা ট্রান্সফার রেট সবচেয়ে বেশি?",o:["শিল্ডেড টুইস্টেড পেয়ার ক্যাবল","আনশিল্ডেড টুইস্টেড পেয়ার ক্যাবল","কোএক্সিয়াল ক্যাবল","ফাইবার অপটিক ক্যাবল"],a:3},
+{q:"অপটিক্যাল ফাইবারের সবচেয়ে ভেতরের অংশ কোনটি?",o:["বাফার","কোর","জ্যাকেট","ক্ল্যাডিং"],a:1},
+{q:"সিঙ্গেল মোড ফাইবারের কোরের ব্যাস মাইক্রনে কত?",o:["1-4","4-8","8-12","12-16"],a:2},
+{q:"অপটিক্যাল ফাইবার ক্যাবলের সুবিধা—\ni. দ্রুত ডেটা স্থানান্তর করতে পারে\nii. রক্ষণাবেক্ষণ সহজ\niii. তড়িৎচৌম্বকীয় প্রভাব থেকে মুক্ত",o:["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],a:1},
+{q:"ফাইবার অপটিক ক্যাবলে আলোকরশ্মি কোন ঘটনার মাধ্যমে দ্রুত ডেটা বহন করে?",o:["প্রতিসরণ","প্রতিফলন","পূর্ণ অভ্যন্তরীণ প্রতিসরণ","পূর্ণ অভ্যন্তরীণ প্রতিফলন"],a:3},
+{q:"বাংলাদেশ ও আমেরিকার মধ্যে নেটওয়ার্ক সংযোগ স্থাপনের সবচেয়ে উপযোগী মাধ্যম কোনটি?",o:["UTP ক্যাবল","STP ক্যাবল","কোএক্সিয়াল ক্যাবল","ফাইবার অপটিক ক্যাবল"],a:3},
+{q:"দুটি সমান্তরাল তামার তারের একটির সিগন্যাল অন্যটির সিগন্যালকে প্রভাবিত করার ঘটনাকে কী বলে?",o:["ক্রসটক","ক্রসরেফারেন্স","ক্রসকানেকশন","ক্রসড"],a:0},
+{q:"ওয়্যার বা ক্যাবল বা গাইডেড মিডিয়া—\ni. টুইস্টেড পেয়ার ক্যাবল\nii. কোএক্সিয়াল ক্যাবল\niii. ফাইবার অপটিক ক্যাবল",o:["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],a:3},
+{q:"তারবিহীন বা আনগাইডেড মিডিয়া—\ni. রেডিও ওয়েভ\nii. মাইক্রোওয়েভ\niii. ইনফ্রারেড ওয়েভ",o:["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],a:3},
+{q:"মোবাইল ফোন নেটওয়ার্কে এক টাওয়ার থেকে অন্য টাওয়ারের মধ্যে যোগাযোগে কী ব্যবহৃত হয়?",o:["রেডিও ওয়েভ","মাইক্রোওয়েভ","ইনফ্রারেড ওয়েভ","অতিবেগুনি রশ্মি"],a:1},
+{q:"মাইক্রোওয়েভ প্রযুক্তির সীমাবদ্ধতা দূর করতে কোন প্রযুক্তি প্রয়োজন?",o:["ইনফ্রারেড","GPS","রেডিও ওয়েভ","কৃত্রিম উপগ্রহ"],a:3},
+{q:"GEO স্যাটেলাইটকে ভূপৃষ্ঠ থেকে কত উচ্চতার নির্দিষ্ট কক্ষপথে স্থাপন করতে হয়?",o:["36000 Km","27000 Km","22000 Km","12000 Km"],a:0},
+{q:"টেলিভিশনের রিমোট কন্ট্রোলে কী ব্যবহৃত হয়?",o:["রেডিও ওয়েভ","মাইক্রোওয়েভ","ইনফ্রারেড ওয়েভ","ব্লুটুথ"],a:2},
+{q:"সম্প্রচারে (broadcasting) সবচেয়ে বেশি ব্যবহৃত মাধ্যম কোনটি?",o:["অপটিক্যাল ফাইবার","রেডিও ওয়েভ","মাইক্রোওয়েভ","টুইস্টেড পেয়ার ক্যাবল"],a:1},
+{q:"উদ্দীপক: মোহনা লক্ষ করল, তাদের এলাকার সবচেয়ে উঁচু দালানগুলোর ওপর বিভিন্ন মোবাইল কোম্পানির টাওয়ার বসানো আছে। এমনকি খোলা প্রান্তরেও অনেক দূরে দূরে টাওয়ারগুলো বসানো, যাদের মাঝখানে কোনো বাধা নেই। উদ্দীপকের উঁচু টাওয়ারগুলো কোন ধরনের মিডিয়া ব্যবহার করে?",o:["রেডিও ওয়েভ","টেরিস্ট্রিয়াল মাইক্রোওয়েভ","ইনফ্রারেড","স্যাটেলাইট মাইক্রোওয়েভ"],a:1},
+{q:"উদ্দীপক: একটি দালানের ওপর কিছু যন্ত্রপাতিসহ একটি অ্যান্টেনা আকাশমুখী করে রাখা হয়েছে। উদ্দীপকের আকাশমুখী ব্যবস্থা ব্যবহার করা হয়—\ni. টেলিভিশনে সিগন্যাল পাঠানোর ক্ষেত্রে\nii. আবহাওয়ার সর্বশেষ অবস্থা পর্যবেক্ষণে\niii. আন্তঃমহাদেশীয় টেলিফোন কলের ক্ষেত্রে",o:["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],a:3},
+{q:"হটস্পট কী?",o:["বিশেষ নিরাপত্তা ব্যবস্থা","তারযুক্ত ইন্টারনেট ব্যবস্থা","তারবিহীন ইন্টারনেট ব্যবস্থা","বিশেষ ধরনের সফটওয়্যার"],a:2},
+{q:"WiMAX-এর পূর্ণরূপ কী?",o:["Worldwide Interoperability for Micro Access","Wide Interoperability for Microwave Access","Worldwide International for Microwave Access","Worldwide Interoperability for Microwave Access"],a:3},
+{q:"WiMAX-এর IEEE স্ট্যান্ডার্ড কোনটি?",o:["802.11","802.11a","802.15","802.16"],a:3},
+{q:"Wi-Fi-এর পূর্ণরূপ কী?",o:["Wireless Fidelity","World wide Fidelity","World wave Fidelity","Wide area Fidelity"],a:0},
+{q:"Wi-Fi-এর IEEE স্ট্যান্ডার্ড কোনটি?",o:["802.11","802.11a","802.15","802.16"],a:0},
+{q:"ব্লুটুথের IEEE স্ট্যান্ডার্ড কোনটি?",o:["802.11","802.11a","802.15","802.16"],a:2},
+{q:"ব্লুটুথের ফ্রিকোয়েন্সি কত?",o:["2.45 KHz","2.45 MHz","2.45 GHz","2.45 THz"],a:2},
+{q:"একটি পিকোনেটে স্লেভ নোড সর্বোচ্চ কয়টি থাকতে পারে?",o:["7","8","9","10"],a:0},
+{q:"পিকোনেট কোনটির সাথে সম্পর্কিত?",o:["ইনফ্রারেড","ব্লুটুথ","ওয়াই-ফাই","ওয়াইম্যাক্স"],a:1},
+{q:"Wi-Fi ও WiMAX-এর মধ্যে পার্থক্য রয়েছে—\ni. কভারেজ এলাকায়\nii. ট্রান্সমিশন মোডে\niii. ট্রান্সমিশন স্পিডে",o:["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],a:1},
+{q:"IEEE 802.11 প্রযুক্তি ব্যবহার করে কোন নেটওয়ার্ক তৈরি করা যায়?",o:["PAN","LAN","MAN","WAN"],a:1}
+];
+var bn="০১২৩৪৫৬৭৮৯";
+function n(x){return String(x).replace(/\d/g,function(d){return bn[d]})}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var Q=DEFAULT.slice(),i=0,right=0,wrong=0,picked=null,log=[],t0=0,tick=null,app=document.getElementById("app");
+var KEY="ictah_ch2_media_v1";
+function load(){try{var d=JSON.parse(localStorage.getItem(KEY));if(d&&d.list)return d}catch(e){}return {name:"",list:[]}}
+function save(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+function fmt(s){var m=Math.floor(s/60),x=s%60;return n((m<10?"0":"")+m+":"+(x<10?"0":"")+x)}
+function el(){return Math.floor((Date.now()-t0)/1000)}
+function stop(){if(tick){clearInterval(tick);tick=null}}
+function start(){
+var inp=document.getElementById("nm"),d=load();
+if(inp){d.name=inp.value.trim();save(d)}if(!d.name){home();return}
+i=0;right=0;wrong=0;picked=null;log=[];t0=Date.now();stop();
+tick=setInterval(function(){var t=document.getElementById("tm");if(t)t.textContent=fmt(el())},1000);
+quiz()}
+function home(){
+stop();var d=load(),c=d.list.length;
+app.innerHTML='<div class="brand">ICT WITH AH SHOIKOT</div><h1>ডেটা কমিউনিকেশন মাধ্যম ও ওয়্যারলেস</h1><p class="sub">এইচএসসি আইসিটি এমসিকিউ: দ্বিতীয় অধ্যায় (২.২ ও ২.৩)</p>'+
+'<div class="card"><p style="margin-top:0">মোট প্রশ্ন: <b>'+n(Q.length)+'</b> · সময়সীমা: <b>নেই</b> (টাইমার চলবে)</p>'+
+'<label class="hint" for="nm">আপনার নাম</label><input id="nm" class="inp" maxlength="40" placeholder="নাম লিখুন" value="'+esc(d.name)+'">'+
+(c?'<p>আপনি এ পর্যন্ত <b>'+n(c)+'</b> বার পরীক্ষা দিয়েছেন।</p>':'')+
+'<div class="row"><button class="btn" id="go"'+(d.name?'':' disabled')+'>পরীক্ষা শুরু করুন</button></div><p class="hint" id="nh">'+(d.name?'':'পরীক্ষা শুরু করতে আগে নাম লিখুন')+'</p></div>';
+var go=document.getElementById("go"),nm=document.getElementById("nm"),nh=document.getElementById("nh");
+nm.oninput=function(){var ok=nm.value.trim().length>0;go.disabled=!ok;nh.textContent=ok?"":"পরীক্ষা শুরু করতে আগে নাম লিখুন"};
+go.onclick=start}
+function quiz(){
+var q=Q[i],L=["ক","খ","গ","ঘ"];
+var h='<div class="brand sm">ICT WITH AH SHOIKOT</div><div class="stats"><div class="stat ok"><b>'+n(right)+'</b>সঠিক ✔</div><div class="stat bad"><b>'+n(wrong)+'</b>ভুল ✖</div><div class="stat"><b>'+n(i+1)+'/'+n(Q.length)+'</b>প্রশ্ন</div><div class="stat"><b id="tm">'+fmt(el())+'</b>সময়</div></div>'+
+'<div class="bar"><i style="width:'+(i/Q.length*100)+'%"></i></div><div class="card"><p class="q">'+esc(q.q)+'</p>';
+q.o.forEach(function(t,k){
+var c="",m=L[k]+")",d="";
+if(picked!==null){d=" disabled";
+if(k===q.a){c=" ok";m="✔"}
+else if(k===picked){c=" bad";m="✖"}}
+h+='<button class="opt'+c+'" data-k="'+k+'"'+d+'><span class="m">'+m+'</span><span class="t">'+esc(t)+'</span></button>'});
+if(picked!==null){h+='<div class="row"><button class="btn" id="nx">'+(i===Q.length-1?"ফলাফল দেখুন":"পরের প্রশ্ন")+'</button></div>'}
+app.innerHTML=h+'</div>';
+Array.prototype.forEach.call(app.querySelectorAll(".opt"),function(b){b.onclick=function(){
+if(picked!==null)return;picked=+b.dataset.k;
+if(picked===q.a)right++;else wrong++;
+log.push({q:q,p:picked});quiz()}});
+var nx=document.getElementById("nx");
+if(nx)nx.onclick=function(){picked=null;i++;if(i>=Q.length)result();else quiz()}}
+function result(){
+stop();var sec=el(),d=load();
+d.list.push({r:right,w:wrong,tot:Q.length,s:sec,t:Date.now()});save(d);saveRemote(d);
+var c=d.list.length,pct=Math.round(right/Q.length*100);
+var share='ICT WITH AH SHOIKOT\nনাম: '+(d.name||'-')+'\nডেটা কমিউনিকেশন মাধ্যম ও ওয়্যারলেস (দ্বিতীয় অধ্যায়)\nমার্ক: '+n(right)+'/'+n(Q.length)+' ('+n(pct)+'%)\nসঠিক: '+n(right)+' | ভুল: '+n(wrong)+'\nসময়: '+fmt(sec)+'\nপ্রচেষ্টা: '+n(c);
+var h='<div class="brand">ICT WITH AH SHOIKOT</div><h1>ফলাফল'+(d.name?': '+esc(d.name):'')+'</h1><div class="card"><div class="big">'+n(right)+'/'+n(Q.length)+'</div>'+
+'<p style="margin:0">'+n(pct)+'% · সময়: '+fmt(sec)+'</p>'+
+'<div class="stats" style="margin-top:12px"><div class="stat ok"><b>'+n(right)+'</b>সঠিক ✔</div><div class="stat bad"><b>'+n(wrong)+'</b>ভুল ✖</div></div>'+
+'<p>এটি আপনার <b>'+n(c)+'</b> নম্বর প্রচেষ্টা।</p>'+
+'<div class="row"><button class="btn" id="re">আবার দিন</button><button class="btn ghost" id="hm">হোম</button></div></div>'+
+'<div class="card" style="margin-top:14px"><b>ফলাফল শেয়ার করুন</b><p class="hint">নিচের লেখাটি কপি করে গ্রুপে বা কমেন্টে পাঠান।</p><textarea id="sh" readonly style="min-height:130px">'+esc(share)+'</textarea><div class="row"><button class="btn ghost" id="cp">কপি করুন</button></div></div><div class="card" style="margin-top:14px"><b>আপনার সব প্রচেষ্টা</b><div class="scroll"><table><tr><th>নং</th><th>মার্ক</th><th>সঠিক</th><th>ভুল</th><th>সময়</th><th>তারিখ</th></tr>';
+d.list.slice().reverse().forEach(function(x,k){
+h+='<tr><td>'+n(c-k)+'</td><td>'+n(x.r)+'/'+n(x.tot||Q.length)+'</td><td>'+n(x.r)+'</td><td>'+n(x.w)+'</td><td>'+fmt(x.s)+'</td><td>'+n(new Date(x.t).toLocaleDateString("en-GB"))+'</td></tr>'});
+h+='</table></div></div>';
+var bad=log.filter(function(x){return x.p!==x.q.a});
+if(bad.length){h+='<div class="card" style="margin-top:14px"><b>যেগুলো ভুল হয়েছে</b>';
+bad.forEach(function(x){h+='<div class="rev">'+esc(x.q.q)+'<br><span class="w">✖ আপনার উত্তর: '+esc(x.q.o[x.p])+'</span><br><span class="a">✔ সঠিক উত্তর: '+esc(x.q.o[x.q.a])+'</span></div>'});
+h+='</div>'}
+app.innerHTML=h;
+document.getElementById("re").onclick=start;
+document.getElementById("cp").onclick=function(){var t=document.getElementById("sh");t.select();try{navigator.clipboard.writeText(t.value)}catch(e){try{document.execCommand("copy")}catch(e2){}}this.textContent="কপি হয়েছে"};
+document.getElementById("hm").onclick=home}
+var DB=null,UID=null,unsub=null;
+(async function(){try{if(typeof claude==="undefined")return;DB=await claude.use("db");var U=await claude.use("user");if(U){UID=await U.id()}}catch(e){}})();
+function saveRemote(d){
+if(!DB||!UID)return;
+try{var list=d.list.slice(-30).map(function(x){return {r:x.r,w:x.w,tot:x.tot,s:x.s,t:x.t}});
+DB.doc("results/"+UID).set({name:d.name||"",list:list,upd:Date.now()}).catch(function(){})}catch(e){}}
+function adminLogin(err){
+app.innerHTML='<div class="brand">ICT WITH AH SHOIKOT</div><h1>অ্যাডমিন</h1><div class="card"><label class="hint" for="an">নাম</label><input id="an" class="inp" autocomplete="off"><label class="hint" for="ap">পাসওয়ার্ড</label><input id="ap" class="inp" type="password" autocomplete="off">'+(err?'<p class="err">নাম বা পাসওয়ার্ড ঠিক নয়।</p>':'')+'<div class="row"><button class="btn" id="al">প্রবেশ করুন</button><button class="btn ghost" id="ab">ফিরে যান</button></div></div>';
+document.getElementById("ab").onclick=home;
+document.getElementById("al").onclick=function(){
+var a=document.getElementById("an").value.trim().toUpperCase(),p=document.getElementById("ap").value.trim();
+if(a==="AFZAL"&&p==="774177")adminView();else adminLogin(true)}}
+function adminView(){
+app.innerHTML='<div class="brand">ICT WITH AH SHOIKOT</div><h1>সব পরীক্ষার্থীর ফলাফল</h1><div class="card"><p id="as" class="hint">লোড হচ্ছে…</p><div class="scroll" id="at"></div><div class="row"><button class="btn ghost" id="ab">বের হোন</button></div></div>';
+document.getElementById("ab").onclick=function(){if(unsub){unsub();unsub=null}home()};
+var st=document.getElementById("as"),box=document.getElementById("at");
+if(!DB){st.textContent="এই ভিউতে ফলাফল ডেটাবেজ চালু নেই। Claude-এ নিজের অ্যাকাউন্টে লগইন থাকা অবস্থায় লিঙ্কটি খুলুন।";return}
+var tm=setTimeout(function(){st.textContent="ফলাফল লোড হচ্ছে না। আবার চেষ্টা করুন।"},10000);
+try{unsub=DB.collection("results").onSnapshot(function(snap){
+clearTimeout(tm);
+var rows=[];snap.docs.forEach(function(d){var v=d.data();if(v&&v.list&&v.list.length)rows.push(v)});
+rows.sort(function(a,b){return (b.upd||0)-(a.upd||0)});
+if(!rows.length){st.textContent="এখনো কোনো ফলাফল জমা পড়েনি, অথবা দেখার অনুমতি নেই।";box.innerHTML="";return}
+st.textContent="মোট পরীক্ষার্থী: "+n(rows.length);
+var h='<table><tr><th>নাম</th><th>প্রচেষ্টা</th><th>শেষ মার্ক</th><th>সেরা মার্ক</th><th>সময়</th><th>তারিখ</th></tr>';
+rows.forEach(function(v){var L=v.list,last=L[L.length-1],best=Math.max.apply(null,L.map(function(x){return x.r}));
+h+='<tr><td>'+esc(v.name||"নামহীন")+'</td><td>'+n(L.length)+'</td><td>'+n(last.r)+'/'+n(last.tot)+'</td><td>'+n(best)+'/'+n(last.tot)+'</td><td>'+fmt(last.s)+'</td><td>'+n(new Date(last.t).toLocaleDateString("en-GB"))+'</td></tr>'});
+box.innerHTML=h+'</table>'},function(e){clearTimeout(tm);st.textContent="ফলাফল পড়া যায়নি। শুধু মালিক বা এডিটর হিসেবে লগইন থাকলে দেখা যাবে।"})}catch(e){st.textContent="ফলাফল পড়া যায়নি।"}}
+home();
+</script>
+</body>
+</html>
